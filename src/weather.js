@@ -1,7 +1,8 @@
 export class Weather{
-    constructor(city)
+    constructor(city, apiKey)
     {   
         this.city = city;
+        this.apiKey = apiKey;
     }
     async getWeather()
     {
@@ -9,7 +10,7 @@ export class Weather{
         const coords = await this.getCityCoords();
 
         // fetching
-        const url = `http://api.openweathermap.org/data/2.5/forecast?appid=85dfcfe9ef0ce0be2a1188644d09aed0&lat=${coords.lat}&lon=${coords.lon}`;
+        const url = `http://api.openweathermap.org/data/2.5/forecast?appid=${this.apiKey}&lat=${coords.lat}&lon=${coords.lon}`;
         const response = await fetch( url, { mode : 'cors' });
         const data = await response.json();
         
@@ -35,7 +36,7 @@ export class Weather{
     }
     async getCityCoords()
     {
-        const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${this.city}&limit=2&appid=85dfcfe9ef0ce0be2a1188644d09aed0`
+        const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${this.city}&limit=2&appid=${this.apiKey}`;
         const response = await fetch(geoUrl);
         const data = await response.json();
         return { 'lat': data[0].lat, lon: data[0].lon };
