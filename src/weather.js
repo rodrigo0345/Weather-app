@@ -10,6 +10,38 @@ export class Weather{
         this.city = city;
     }
 
+    formatResponseWeather(data)
+    {
+        const result = [];
+
+        data.list.forEach(time =>{
+            const day = time.dt_txt.split(' ')[0];
+            const hour = time.dt_txt.split(' ')[1];
+
+            const state = {
+                'day': day,
+                'hour': hour,
+                'temperature': {
+                    'tmp': time.main.temp,
+                    'min': time.main.temp_min,
+                    'max': time.main.temp_max
+                },
+                'weather': {
+                    'name': time.weather[0].description,
+                    'icon': time.weather[0].icon
+                },
+                'humidity': time.main.humidity,
+                'wind': {
+                    'speed': time.wind.speed,
+                }
+            }
+
+            result.push(state);
+        });
+
+        return result;
+    }
+
     async getWeather()
     {
         // geocoding
@@ -22,23 +54,9 @@ export class Weather{
 
         console.log(data);
 
-        const weather = {
-            'city': this.city,
-            'temperature': {
-                'tmp': Number(data.list[0].main.temp),
-                'min': Number(data.list[0].main.temp_min),
-                'max': Number(data.list[0].main.temp_max)
-            },
-            'humidity': {
-                'value': data.list[0].main.humidity
-            },
-            'condition': {
-                'name': data.list[0].weather[0].description,
-                'icon': data.list[0].weather[0].icon
-            }
-        }
+        const result = this.formatResponseWeather(data);
         
-        return weather;
+        return result;
     }
 
     async getCityCoords()
