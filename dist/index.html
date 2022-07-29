@@ -10,13 +10,15 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="./css/main.css" />
+		<link rel="shortcut icon" href="https://imgs.search.brave.com/-DXY9Ovj9SXFTJMs1mjurDWtOyuxUYbETID5jOhzO98/rs:fit:1024:1024:1/g:ce/aHR0cHM6Ly9jZG4u/amltLW5pZWxzZW4u/Y29tL2lvcy8xMDI0/L3dlYXRoZXItMjAx/OS0wMi0wNy5wbmc" type="image/x-icon">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js"></script>
 	</head>
 	<body class="is-preload">
 
 		<!-- Header -->
+
 			<div id="header">
-				<span class="logo icon fa-paper-plane"></span>
+				<span class="logo icon"></span>
 				<h1 id="city">London</h1>
 				<p id="temperature">27ºC
 				<br />
@@ -26,32 +28,35 @@
 		<!-- Main -->
 			<div id="main">
 
+				<div class="search-container">
+					<form action="#" method="post">
+						<input type="text" name="city" id="city" placeholder="Enter a city..." />
+						<input type="submit" value="Search" />
+					</form>
+				</div>
+
 				<header class="major container medium">
 					<h2 id="overview">
-						<span id="description">Description</span>
+						<span id="description" class="highlight">Description</span>
 					<br />
-					Minimum temperature: <span id="min-temp">20ºC</span>
+					Minimum temperature: <span id="min-temp" class="highlight">20ºC</span>
 					<br />
-					Maximum temperature: <span id="max-temp">26ºC</span></h2>
-					<!--
-					<p>Tellus erat mauris ipsum fermentum<br />
-					etiam vivamus nunc nibh morbi.</p>
-					-->
+					Maximum temperature: <span id="max-temp" class="highlight">26ºC</span></h2>
 				</header>
 
 				<div class="box alt container">
 					<section class="feature left">
 						<a href="#" class="image fa-signal"><canvas id="dashboard"></canvas></a>
 						<div class="content">
-							<h3>Dashboard</h3>
+							<h3 class="highlight">Dashboard</h3>
 							<p>Here you can see the chart with the temperature for the rest of the day.</p>
 						</div>
 					</section>
 					<section class="feature right">
 						<a href="#" class="image icon solid fa-code"><canvas id="three-days"></canvas></a>
 						<div class="content">
-							<h3>Next 3 days</h3>
-							<p>Tomorrow the temperature will be around: <span id="tomorrow-temp">23ºC</span></p>
+							<h3 class="highlight">Next 3 days</h3>
+							<p>Tomorrow the temperature will be around: <span id="tomorrow-temp" class="highlight">23ºC</span></p>
 						</div>
 					</section>
 				</div>

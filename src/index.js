@@ -47,8 +47,8 @@ function generateWeatherGraph(data, element)
             {
                 label: 'Temperature (ºC)',
                 data: datapoints,
-                backgroundColor: 'rgba(255, 200, 132, 0.5)',
-                borderColor: 'rgba(255, 200, 132, 1)',
+                backgroundColor: 'rgba(87, 140, 255, 0.8)',
+                borderColor: 'rgba(87, 140, 255, 1)',
                 tension: 0.1,
             }
         ]
@@ -99,7 +99,7 @@ weather.getWeather()
             temperature.innerText = data[0].temperature.tmp + "ºC";
             min_temp.innerText = data[0].temperature.min + "ºC";
             max_temp.innerText = data[0].temperature.max + "ºC";
-            tomorrow_temp.innerText = data[1].temperature.tmp + "ºC";
+            tomorrow_temp.innerText = data[8].temperature.tmp + "ºC";
             description.innerText = data[0].weather.name;
         }); // activate in the end to not waste resources
 
