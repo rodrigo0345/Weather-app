@@ -5,24 +5,48 @@ import "./styles.scss";
 import { Weather } from "./weather";
 
 
-function generateWeatherGraph(data)
+// basic dom variables
+const city = document.getElementById('city');
+const temperature = document.getElementById('temperature');
+const min_temp = document.getElementById('min-temp');
+const max_temp = document.getElementById('max-temp');
+const dashboard = document.getElementById('dashboard');
+const tomorrow_temp = document.getElementById('tomorrow-temp');
+
+function generateWeatherGraph(data, element) 
 {
     const labels = [], datapoints = [];
 
+    let initial_time;
+    let end = false;
     data.forEach(time =>{
-        labels.push(time.hour);
-        datapoints.push(time.temperature.tmp);
+        if(time.hour === initial_time)
+        {
+            end = true;
+        }
+        
+        if(!initial_time)
+        {
+            initial_time = time.hour;
+        }
+        
+        if(!end)
+        {
+            labels.push(time.hour);
+            datapoints.push(time.temperature.tmp);
+        }
+       
     }); 
 
     const aux = {
         labels: labels,
         datasets: [
             {
-                label: 'Temperatura (ºC)',
+                label: 'Temperature (ºC)',
                 data: datapoints,
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                tension: 0.5,
+                backgroundColor: 'rgba(255, 200, 132, 0.5)',
+                borderColor: 'rgba(255, 200, 132, 1)',
+                tension: 0.1,
             }
         ]
     }
@@ -39,15 +63,26 @@ function generateWeatherGraph(data)
         },
     }
 
-    const chart = new Chart(document.getElementById('myChart'), config);
+    const chart = new Chart(element, config);
+    return chart;
 }
 
-const info = document.querySelector(".info");
 
-const weather = new Weather("Barcelos", "85dfcfe9ef0ce0be2a1188644d09aed0");
+let curr_city = 'Barcelos';
+let key = "85dfcfe9ef0ce0be2a1188644d09aed0";
+
+const weather = new Weather(curr_city, key);
 weather.getWeather()
         .then(data => {
-            generateWeatherGraph(data);
+            generateWeatherGraph(data, dashboard);
+
+            // update dom
+            city.innerText = curr_city;
+            temperature.innerText = data[0].temperature.tmp + "ºC";
+            min_temp.innerText = data[0].temperature.min + "ºC";
+            max_temp.innerText = data[0].temperature.max + "ºC";
+            tomorrow_temp.innerText = data[1].temperature.tmp + "ºC";
+
         }); // activate in the end to not waste resources
 
 
