@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<!--
+	Directive by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Weather</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="./css/main.css" />
+		<link rel="shortcut icon" href="https://imgs.search.brave.com/-DXY9Ovj9SXFTJMs1mjurDWtOyuxUYbETID5jOhzO98/rs:fit:1024:1024:1/g:ce/aHR0cHM6Ly9jZG4u/amltLW5pZWxzZW4u/Y29tL2lvcy8xMDI0/L3dlYXRoZXItMjAx/OS0wMi0wNy5wbmc" type="image/x-icon">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js"></script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+
+			<div id="header">
+				<span class="logo icon"></span>
+				<h1 id="city">London</h1>
+				<p id="temperature">27ºC
+				<br />
+				</p>
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+
+				<div class="search-container">
+					<h2 class="highlight">Change the city</h2>
+					<form action="#" method="post" id="change-city">
+						<input type="text" name="city" id="city-input" placeholder="Enter a city..." />
+						<input type="submit" value="Search" />
+					</form>
+				</div>
+
+				<header class="major container medium">
+					<h2 id="overview">
+						<span id="description" class="highlight">Description</span>
+					</h2>
+					<br>
+					<h2>
+					Minimum temperature: <span id="min-temp" class="highlight">20ºC</span>
+					</h2>
+					<br>
+					<h2>
+					Maximum temperature: <span id="max-temp" class="highlight">26ºC</span></h2>
+				</header>
+
+				<div class="box alt container">
+					<section class="feature left">
+						<a href="#" class="image fa-signal"><canvas id="dashboard"></canvas></a>
+						<div class="content">
+							<h3 class="highlight">Dashboard</h3>
+							<p>Here you can see the chart with the temperature for the rest of the day.</p>
+						</div>
+					</section>
+					
+					<div class="extra">
+						<div class="info-extra">
+							<h2>Wind</h2>
+							<p class="highlight" id="wind-velocity">20Km/h</p>
+						</div>
+						<div class="info-extra">
+							<h2>Humidity</h2>
+							<p class="highlight"
+							id="humidity">
+								20%
+							</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		<!-- Footer -->
+			<div id="footer">
+				<div class="container medium">
+
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+					</ul>
+
+					<ul class="copyright">
+						<li>&copy; Untitled. All rights reserved.</li>
+					</ul>
+
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="bundle.js"></script>
+	</body>
+</html>
