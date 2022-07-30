@@ -82,10 +82,21 @@ weather.getWeather()
         .then(data => {
             generateWeatherGraph(data, dashboard);
 
+            let searchInGiphy = '';
+            if(Number(data[0].hour.split(':')[0]) > 20 || Number(data[0].hour.split(':')[0]) < 7)
+            {
+                searchInGiphy = data[0].weather.name + ' night';
+            }
+            else
+            {
+                searchInGiphy = data[0].weather.name + ' day';
+            }
+            
             // get a gif
-            giphy.getGif(data[0].weather.name).then(gif => {
+            giphy.getGif(searchInGiphy).then(gif => {
                 console.log(gif);
                 header.style.cssText = `background-image: url('${gif}');
+                background-attachment: fixed;
                 background-size: cover;
                 background-position: center center;
                 `;
@@ -93,8 +104,6 @@ weather.getWeather()
             
 
             // update dom
-            
-
             city.innerText = curr_city;
             temperature.innerText = data[0].temperature.tmp + "ºC";
             min_temp.innerText = data[0].temperature.min + "ºC";
