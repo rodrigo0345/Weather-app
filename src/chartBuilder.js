@@ -66,31 +66,9 @@ export class ChartJS{
         return chart;
     }
 
-    updateChart(chart, data)
+    updateChart(chart, canvas, data)
     {      
-        let initial_time;
-        let end = false;
-
-        data.forEach(time =>{
-            if(time.hour === initial_time)
-            {
-                end = true;
-            }
-            
-            if(!initial_time)
-            {
-                initial_time = time.hour;
-            }
-            
-            if(!end)
-            {
-                this.labels.push(time.hour);
-                this.datapoints.push(time.temperature.tmp);
-            }
-        
-        }); 
-
-        chart.data.labels = this.labels;
-        chart.data.datasets[0].data = this.datapoints;
+        chart.destroy();
+        return this.newChart(canvas, data);
     }
 }

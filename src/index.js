@@ -9,7 +9,7 @@ import { Giphy } from "./giphy";
 import { Home } from "./DOM";
 import { ChartJS } from './chartBuilder';
 
-let curr_city = 'Barcelos';
+let curr_city = 'World';
 
 function searchCity(e)
 {
@@ -41,7 +41,7 @@ function mainApp()
     {
         if(chart !== null)
         {
-            graph.updateChart(chart, data);
+            chart = graph.updateChart(chart, dashboard, data);
         }
         else
         {
