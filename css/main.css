@@ -2613,7 +2613,15 @@ input, select, textarea {
 
 	.feature {
 		position: relative;
-		height: 20em;
+		display: flex;
+		justify-content: center;
+		flex-direction: row;
+		flex-wrap: wrap;
+		width: 100%;
+		align-items: center;
+		position: relative;
+		min-height: 400px;
+		max-height: 500px;
 	}
 
 		.feature:after {
@@ -2650,6 +2658,7 @@ input, select, textarea {
 		}
 
 		.feature .content {
+			flex: 1 0 auto;
 			display: inline-block;
 			padding: 3.5em;
 			vertical-align: middle;
@@ -3328,4 +3337,13 @@ input, select, textarea {
 	.extra p{
 		text-align: center;
 		font-size: 2em;
+	}
+
+	#dashboard{
+		flex: 1 1 30%;
+		background-color: #4741483d;
+		padding: 10px;
+		max-width: 500px;
+		max-height: 350px;
+		min-height: 300px;
 	}
