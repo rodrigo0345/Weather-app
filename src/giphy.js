@@ -9,7 +9,6 @@ export class Giphy{
 
         const response = await fetch(url, { mode : 'cors' });
         const data = await response.json();
-        console.log(data);
         const result = this.formatResponseGif(data.data);
 
         return result[0];

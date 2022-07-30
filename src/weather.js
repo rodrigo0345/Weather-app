@@ -30,6 +30,7 @@ export class WeatherAPI{
                 }
             }
 
+
             result.push(state);
         });
 
@@ -42,11 +43,9 @@ export class WeatherAPI{
         const coords = await this.getCityCoords(city);
 
         // fetching
-        const url = `http://api.openweathermap.org/data/2.5/forecast?appid=${this.apiKey}&lat=${coords.lat}&lon=${coords.lon}&units=metric`;
+        const url = `https://api.openweathermap.org/data/2.5/forecast?appid=${this.apiKey}&lat=${coords.lat}&lon=${coords.lon}&units=metric`;
         const response = await fetch( url, { mode : 'cors' });
         const data = await response.json();
-
-        console.log(data);
 
         const result = this.formatResponseWeather(data);
         
@@ -55,9 +54,11 @@ export class WeatherAPI{
 
     async getCityCoords(city)
     {
-        const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=2&appid=${this.apiKey}`;
+        const geoUrl = `https://nominatim.openstreetmap.org/search?format=json&polygon=1&q=${city}`
+        
         const response = await fetch(geoUrl);
         const data = await response.json();
+
         return { 'lat': data[0].lat, 'lon': data[0].lon };
     }
 

@@ -63,8 +63,6 @@ export class ChartJS{
         
         // chart is not recognised here
         const chart = new Chart(canvas, config);
-
-        console.log(chart)
         return chart;
     }
 

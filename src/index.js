@@ -9,7 +9,6 @@ import { Giphy } from "./giphy";
 import { Home } from "./DOM";
 import { ChartJS } from './chartBuilder';
 
-
 let curr_city = 'Barcelos';
 
 function searchCity(e)
