@@ -10,7 +10,7 @@ First install dependencies:
 npm install
 ```
 
-To create a production build:
+To create and demo a production build:
 
 ```sh
 npm run build-prod
