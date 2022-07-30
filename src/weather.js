@@ -1,8 +1,8 @@
-export class Weather{
-    constructor(city, apiKey)
+export class WeatherAPI{
+    constructor(city)
     {   
         this.city = city;
-        this.apiKey = apiKey;
+        this.apiKey = "85dfcfe9ef0ce0be2a1188644d09aed0";
     }
 
     changeCity(city)
@@ -66,4 +66,5 @@ export class Weather{
         const data = await response.json();
         return { 'lat': data[0].lat, 'lon': data[0].lon };
     }
+
 }

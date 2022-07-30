@@ -2,19 +2,11 @@ import "./styles.css";
 import "./styles.scss";
 
 
-import { Weather } from "./weather";
+import { WeatherAPI } from "./weather";
 import { Giphy } from "./giphy";
+import { Home } from "./DOM";
+import { Chart } from './chartBuilder';
 
-
-// basic dom variables
-const city = document.getElementById('city');
-const temperature = document.getElementById('temperature');
-const min_temp = document.getElementById('min-temp');
-const max_temp = document.getElementById('max-temp');
-const dashboard = document.getElementById('dashboard');
-const tomorrow_temp = document.getElementById('tomorrow-temp');
-const description = document.getElementById('description');
-const header = document.getElementById('header');
 
 function generateWeatherGraph(data, element) 
 {
@@ -70,47 +62,64 @@ function generateWeatherGraph(data, element)
     return chart;
 }
 
-
 let curr_city = 'Barcelos';
-let weatherKey = "85dfcfe9ef0ce0be2a1188644d09aed0";
-let giphyKey = "45j3475WNdpgrjPpn1blPTSh0HjNLUFz";
 
-const giphy = new Giphy(giphyKey);
-const weather = new Weather(curr_city, weatherKey);
+function searchCity(e)
+{
+    e.preventDefault();
 
-weather.getWeather()
-        .then(data => {
-            generateWeatherGraph(data, dashboard);
+    const new_city = document.getElementById('city-input').value;
 
-            let searchInGiphy = '';
-            if(Number(data[0].hour.split(':')[0]) > 20 || Number(data[0].hour.split(':')[0]) < 7)
-            {
-                searchInGiphy = data[0].weather.name + ' night';
-            }
-            else
-            {
-                searchInGiphy = data[0].weather.name + ' day';
-            }
-            
-            // get a gif
-            giphy.getGif(searchInGiphy).then(gif => {
-                console.log(gif);
-                header.style.cssText = `background-image: url('${gif}');
-                background-attachment: fixed;
-                background-size: cover;
-                background-position: center center;
-                `;
-            });
-            
+    if(new_city === '') { window.alert('Please fill in the city') }
 
-            // update dom
-            city.innerText = curr_city;
-            temperature.innerText = data[0].temperature.tmp + "ºC";
-            min_temp.innerText = data[0].temperature.min + "ºC";
-            max_temp.innerText = data[0].temperature.max + "ºC";
-            tomorrow_temp.innerText = data[8].temperature.tmp + "ºC";
-            description.innerText = data[0].weather.name;
-        }); // activate in the end to not waste resources
+    curr_city = new_city;
+
+    mainApp();
+}
+
+
+const home = new Home(searchCity);
+const giphy = new Giphy();
+const weather = new WeatherAPI(curr_city);
+const graph = new Chart();
+
+function mainApp()
+{
+    function processWeather(data)
+    {
+        graph.newChart(dashboard, data);
+
+        let current_hour = Number(data[0].hour.split(':')[0]);
+        let searchInGiphy = '';
+
+        if(current_hour > 20 || current_hour < 6){ searchInGiphy = data[0].weather.name + ' night'; }
+        else { searchInGiphy = data[0].weather.name + ' day'; }
+        
+        // get a gif
+        const gif = giphy.getGif(searchInGiphy);
+
+        // update the Home page
+        gif.then(result =>{
+            home.outputBackgroundInHeader(result);
+        });
+        
+        // update dom
+        home.outputCity(curr_city);
+        home.outputTemperature(data[0].temperature.tmp + "ºC");
+        home.outputMinTemperature(data[0].temperature.min + "ºC");
+        home.outputMaxTemperature(data[0].temperature.max + "ºC");
+        home.outputTomorrowTemperature(data[8].temperature.tmp + "ºC");
+        home.outputDescription(data[0].weather.name);
+    }
+
+    const data = weather.getWeather();
+    data.then(data =>{ processWeather(data) });
+}
+
+// inicialization
+mainApp();
+
+
 
 
 

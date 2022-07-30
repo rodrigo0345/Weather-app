@@ -1,7 +1,7 @@
 export class Giphy{
-    constructor(apiKey)
+    constructor()
     {
-        this.apiKey = apiKey;
+        this.apiKey = "45j3475WNdpgrjPpn1blPTSh0HjNLUFz";
     }
     async getGif(value)
     {
