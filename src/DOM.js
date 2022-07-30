@@ -5,11 +5,12 @@ export class Home{
         this.city = document.getElementById('city');
         this.temperature = document.getElementById('temperature');
         this.min_temp = document.getElementById('min-temp');
-        this. max_temp = document.getElementById('max-temp');
-        this. dashboard = document.getElementById('dashboard');
-        this. tomorrow_temp = document.getElementById('tomorrow-temp');
+        this.max_temp = document.getElementById('max-temp');
+        this.dashboard = document.getElementById('dashboard');
         this.description = document.getElementById('description');
         this.header = document.getElementById('header');
+        this.wind = document.getElementById('wind-velocity');
+        this.humidity = document.getElementById('humidity');
 
         // city change
         this.search_city = document.getElementById('change-city');
@@ -47,11 +48,6 @@ export class Home{
         this.max_temp.innerText = max_temp;
     }
 
-    outputTomorrowTemperature(tomorrow_temp)
-    {
-        this.tomorrow_temp.innerText = tomorrow_temp;
-    }
-
     outputDescription(description)
     {
         this.description.innerText = description;
@@ -64,5 +60,15 @@ export class Home{
                 background-size: cover;
                 background-position: center center;
                 `;
+    }
+
+    outputHumidity(humidity)
+    {
+        this.humidity.innerText = humidity;
+    }
+
+    outputWind(wind)
+    {
+        this.wind.innerText = wind;
     }
 }

@@ -1,13 +1,7 @@
 export class WeatherAPI{
     constructor(city)
     {   
-        this.city = city;
         this.apiKey = "85dfcfe9ef0ce0be2a1188644d09aed0";
-    }
-
-    changeCity(city)
-    {
-        this.city = city;
     }
 
     formatResponseWeather(data)
@@ -42,10 +36,10 @@ export class WeatherAPI{
         return result;
     }
 
-    async getWeather()
+    async getWeather(city)
     {
         // geocoding
-        const coords = await this.getCityCoords();
+        const coords = await this.getCityCoords(city);
 
         // fetching
         const url = `http://api.openweathermap.org/data/2.5/forecast?appid=${this.apiKey}&lat=${coords.lat}&lon=${coords.lon}&units=metric`;
@@ -59,9 +53,9 @@ export class WeatherAPI{
         return result;
     }
 
-    async getCityCoords()
+    async getCityCoords(city)
     {
-        const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${this.city}&limit=2&appid=${this.apiKey}`;
+        const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=2&appid=${this.apiKey}`;
         const response = await fetch(geoUrl);
         const data = await response.json();
         return { 'lat': data[0].lat, 'lon': data[0].lon };

@@ -1,4 +1,4 @@
-export class Chart{
+export class ChartJS{
     constructor()
     {
         this.labels = [];
@@ -94,6 +94,5 @@ export class Chart{
 
         chart.data.labels = this.labels;
         chart.data.datasets[0].data = this.datapoints;
-        chart.data.options.title.text = 'Temperature in ' + data[0].day;
     }
 }
